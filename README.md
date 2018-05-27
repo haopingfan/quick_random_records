@@ -55,12 +55,12 @@ This strategy is fast because:
    You can configure your own multiply, which is 1.25 by default.
    EX: My table has 10% deleted records, so multiply 1.1 will maximum the speed of random_records. 
     
-    ```ruby
-    # select 1.1 times more than required, that is 110 here.
-    # it will truncate to 100 before method return.
+ ```ruby
+ # select 1.1 times more than required, that is 110 here. 
+ # And it will truncate to 100 before method return.
     
-     users = User.random_records(100, multiply: 1.1) 
-    ```
+ users = User.random_records(100, multiply: 1.1) 
+ ```
    
 ## Drawback
 
