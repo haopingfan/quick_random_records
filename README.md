@@ -1,7 +1,6 @@
-# QuickRandomRecords
+## QuickRandomRecords
 
-`quick_random_records` is a Ruby Gem that empowers ActiveRecord Models with the ability to return random records
-fast and efficiently.
+`quick_random_records` is a Ruby Gem that empowers ActiveRecord Models with the ability to return random records dramatically fast and efficiently.
 
 ## Installation
 
@@ -25,6 +24,14 @@ Or install it yourself as:
 # return ActiveRecord::Relation contains 10 random model objects from User Table
 users = User.random_records(10)
 ```
+
+## Dramatically efficient, compared to other random records strategy
+
+1. Model.random_records(num)  # this gem
+
+2. Model.order("RAND()").limit(num)
+
+3. Model.where(id: Model.pluck(:id).sample(num))
 
 ## Development
 
