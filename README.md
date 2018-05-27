@@ -27,7 +27,7 @@ users = User.random_records(10)
 
 ## Dramatically efficient, compared to other random records strategy
 
-1. Model.random_records(num)  # this gem
+1. quick_random_records
 ![alt text](https://user-images.githubusercontent.com/19776127/40585122-b6a90cae-61df-11e8-8b54-96f238a370f2.png)
 2. Model.order("RAND()").limit(num)
 ![alt text](https://user-images.githubusercontent.com/19776127/40585124-b6f7b0a2-61df-11e8-9884-86f96354efbc.png)
