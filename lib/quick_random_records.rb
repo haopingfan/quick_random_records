@@ -2,7 +2,7 @@ require 'quick_random_records/version'
 require 'active_record'
 
 class ActiveRecord::Base
-  def self.random_records(quantity, strategy: 1, multiply: 1.25, loop_limit: 3)
+  def self.random_records(quantity, strategy: 1, multiply: 1.05, loop_limit: 3)
     case strategy
     when 1
       self.sample_complement_records(quantity, multiply, loop_limit)
