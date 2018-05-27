@@ -42,6 +42,24 @@ Scenario: query 100 random records from table with 550,000 data rows.
 
 ![alt text](https://user-images.githubusercontent.com/19776127/40585161-5add98b2-61e0-11e8-9265-11bef7a1536d.png)
 
+## Fine-tuning
+
+This strategy is fast because:
+(1) Instead of plucking all ids in the table, it selects ids bewteen min_id and max_id.
+    Then make complements if any missing records (id between min_id and max_id, but not exist in db). 
+(2) 
+
+## Drawback
+
+This strategy works extremely well with table that has a lot of records and few deleted records.
+
+But for tables with a lot of deleted records (ex: 8 deleted reocrds out of 10 records),
+it may return fewer random records as expected since I limit the loop it searchs for complements.
+
+The default `loop_limit` is `3`. You can configure your own `loop_limit` for searching complements.
+```ruby
+users = User.random_records(100, loop_limit: 5)
+```
 
 ## Development
 
