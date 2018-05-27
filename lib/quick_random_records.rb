@@ -2,10 +2,10 @@ require 'quick_random_records/version'
 require 'active_record'
 
 class ActiveRecord::Base
-  def self.random_records(quantity, strategy: 1, multiple: 1.25, loop_limit: 3)
+  def self.random_records(quantity, strategy: 1, multiply: 1.25, loop_limit: 3)
     case strategy
     when 1
-      self.sample_complement_records(quantity, multiple, loop_limit)
+      self.sample_complement_records(quantity, multiply, loop_limit)
     when 2
       self.order_rand_limit_records(quantity)
     when 3
@@ -17,20 +17,20 @@ class ActiveRecord::Base
 
   private
 
-  def self.sample_complement_records(quantity, multiple, loop_limit)
+  def self.sample_complement_records(quantity, multiply, loop_limit)
     min_max = self.pluck('MIN(id), MAX(id)').first
     id_range = (min_max[0]..min_max[1])
 
-    samples = [*id_range].sample(quantity * multiple)
+    samples = [*id_range].sample(quantity * multiply)
     exist_samples = self.where(id: samples).pluck(:id)
     exist_samples_size = exist_samples.size
     deficit = quantity - exist_samples_size
     exist_samples_size = 1 if exist_samples_size.zero?
-    deficit_weight = quantity * multiple / exist_samples_size
+    deficit_weight = quantity * multiply / exist_samples_size
     n = 1
 
     while deficit > 0 && n <= loop_limit
-      complements = ([*id_range] - samples).sample(deficit * multiple * deficit_weight * n)
+      complements = ([*id_range] - samples).sample(deficit * multiply * deficit_weight * n)
       exist_complements = self.where(id: complements).pluck(:id)
 
       deficit -= exist_complements.size
