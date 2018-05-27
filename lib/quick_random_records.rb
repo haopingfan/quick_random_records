@@ -1,16 +1,17 @@
 require 'quick_random_records/version'
 require 'active_record'
-require 'rails_or'
 
 class ActiveRecord::Base
-  def self.random_records(quantity, mode: 1, multiple: 1.25, loop_limit: 3)
-    case mode
+  def self.random_records(quantity, strategy: 1, multiple: 1.25, loop_limit: 3)
+    case strategy
     when 1
       self.sample_complement_records(quantity, multiple, loop_limit)
     when 2
       self.order_rand_limit_records(quantity)
     when 3
       self.pluck_sample_records(quantity)
+    else
+      "this gem doesn't support strategy other than 1, 2, 3"
     end
   end
 
