@@ -26,7 +26,7 @@ Or install it yourself as:
 users = User.random_records(10)
 ```
 
-## Dramatically fast, compared to other random records strategies
+## Dramatically fast, compared to common random records strategies
 
 Scenario: query 100 random records from table with 550,000 data rows.
 
@@ -49,14 +49,14 @@ This strategy is fast because:
 (1) Instead of plucking all id in the table, it selects id bewteen min_id and max_id.
     Then make complements if any missing records (id between min_id and max_id, but not exist in db). 
 
-(2) It select id 1.25 times more than required. So that it doesn't need to perform another query to make complements.
-    And of course, it will truncate to the required number before method return.
+(2) It selects records 1.05 times more than required. So that it doesn't need to perform another query to make complements.
+    And of course, it will truncate to required number of records before method return.
     
-   You can configure your own multiply, which is 1.25 by default.
-   EX: My table has 10% deleted records, so multiply 1.1 will maximum the speed of random_records. 
+   You can configure your own multiply, which is 1.05 by default.
+   EX: If table has 10% deleted records, multiply 1.1 will maximize the speed of random_records. 
     
  ```ruby
- # select 1.1 times more than required, that is 110 here. 
+ # select 1.1 times more than required, that is 110 in this case. 
  # And it will truncate to 100 before method return.
     
  users = User.random_records(100, multiply: 1.1) 
@@ -74,16 +74,16 @@ The default `loop_limit` is `3`. You can configure your own `loop_limit` for sea
 users = User.random_records(100, loop_limit: 5)
 ```
 
-or 
+OR
 
 You can use other strategy for tables with a lot of deleted records.
 
-`Model.order("RAND()").limit(num)` is strategy 2
+`Model.order("RAND()").limit(num)` is strategy 2 supported by this GEM
 ```ruby
 users = User.random_records(100, strategy: 2)
 ```
 
-`Model.where(id: Model.pluck(:id).sample(num))` is strategy 3
+`Model.where(id: Model.pluck(:id).sample(num))` is strategy 3 supported by this GEM
 ```ruby
 users = User.random_records(100, strategy: 3)
 ```
