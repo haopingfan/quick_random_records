@@ -22,6 +22,7 @@ Or install it yourself as:
 
 ```ruby
 # return ActiveRecord::Relation contains 10 random model objects from User Table
+
 users = User.random_records(10)
 ```
 
