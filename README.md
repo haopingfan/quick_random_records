@@ -38,7 +38,7 @@ Scenario: query 100 random records from table with 550,000 data rows.
 ![alt text](https://user-images.githubusercontent.com/19776127/40585123-b6d07f00-61df-11e8-9622-e4cd61100e37.png)
 
 
-![alt text](https://user-images.githubusercontent.com/19776127/40586676-13af3258-61f8-11e8-9ca0-1b87becba4a9.png)
+![alt text](https://user-images.githubusercontent.com/19776127/40586737-e07cb99a-61f8-11e8-8d02-2a3dd4a832b5.png)
 
 ![alt text](https://user-images.githubusercontent.com/19776127/40585161-5add98b2-61e0-11e8-9265-11bef7a1536d.png)
 
