@@ -27,11 +27,13 @@ users = User.random_records(10)
 
 ## Dramatically fast, compared to other random records strategies
 
-1. `quick_random_records` takes total `25.0ms`
+query 100 random records from table has 550,000 rows.
+
+1. `quick_random_records` costs `25.0ms`.
 ![alt text](https://user-images.githubusercontent.com/19776127/40585122-b6a90cae-61df-11e8-8b54-96f238a370f2.png)
-2. `Model.order("RAND()").limit(num)` takes `3314.1ms`
+2. `Model.order("RAND()").limit(num)` costs `3314.1ms`.
 ![alt text](https://user-images.githubusercontent.com/19776127/40585124-b6f7b0a2-61df-11e8-9884-86f96354efbc.png)
-3. `Model.where(id: Model.pluck(:id).sample(num))` takes `1659.4ms`
+3. `Model.where(id: Model.pluck(:id).sample(num))` costs `1659.4ms`.
 ![alt text](https://user-images.githubusercontent.com/19776127/40585123-b6d07f00-61df-11e8-9622-e4cd61100e37.png)
 
 
