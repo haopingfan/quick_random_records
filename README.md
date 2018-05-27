@@ -1,8 +1,7 @@
 # QuickRandomRecords
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/quick_random_records`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+`quick_random_records` is a Ruby Gem that empowers ActiveRecord Models with the ability to return random records
+fast and efficiently.
 
 ## Installation
 
@@ -22,7 +21,10 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+# return ActiveRecord::Relation contains 10 random model objects from User Table
+users = User.random_records(10)
+```
 
 ## Development
 
@@ -37,7 +39,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Code of Conduct
-
-Everyone interacting in the QuickRandomRecords project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/quick_random_records/blob/master/CODE_OF_CONDUCT.md).
