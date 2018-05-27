@@ -30,15 +30,15 @@ users = User.random_records(10)
 
 Scenario: query 100 random records from table with 550,000 data rows.
 
-1. `quick_random_records` costs `25.0ms`.
-![alt text](https://user-images.githubusercontent.com/19776127/40585122-b6a90cae-61df-11e8-8b54-96f238a370f2.png)
+1. `quick_random_records` costs only `6.2ms` totally.
+![alt text](https://user-images.githubusercontent.com/19776127/40586675-137b0f5a-61f8-11e8-85e3-4df7a96ed343.png)
 2. `Model.order("RAND()").limit(num)` costs `3314.1ms`.
 ![alt text](https://user-images.githubusercontent.com/19776127/40585124-b6f7b0a2-61df-11e8-9884-86f96354efbc.png)
-3. `Model.where(id: Model.pluck(:id).sample(num))` costs `1659.4ms`.
+3. `Model.where(id: Model.pluck(:id).sample(num))` costs `1659.4ms` totally.
 ![alt text](https://user-images.githubusercontent.com/19776127/40585123-b6d07f00-61df-11e8-9622-e4cd61100e37.png)
 
 
-![alt text](https://user-images.githubusercontent.com/19776127/40585160-59fe14bc-61e0-11e8-891f-ecd144d46905.png)
+![alt text](https://user-images.githubusercontent.com/19776127/40586676-13af3258-61f8-11e8-9ca0-1b87becba4a9.png)
 
 ![alt text](https://user-images.githubusercontent.com/19776127/40585161-5add98b2-61e0-11e8-9265-11bef7a1536d.png)
 
