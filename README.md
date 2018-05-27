@@ -28,10 +28,17 @@ users = User.random_records(10)
 ## Dramatically efficient, compared to other random records strategy
 
 1. Model.random_records(num)  # this gem
-
+![alt text](https://user-images.githubusercontent.com/19776127/40585122-b6a90cae-61df-11e8-8b54-96f238a370f2.png)
 2. Model.order("RAND()").limit(num)
-
+![alt text](https://user-images.githubusercontent.com/19776127/40585124-b6f7b0a2-61df-11e8-9884-86f96354efbc.png)
 3. Model.where(id: Model.pluck(:id).sample(num))
+![alt text](https://user-images.githubusercontent.com/19776127/40585123-b6d07f00-61df-11e8-9622-e4cd61100e37.png)
+
+
+![alt text](https://user-images.githubusercontent.com/19776127/40585160-59fe14bc-61e0-11e8-891f-ecd144d46905.png)
+
+![alt text](https://user-images.githubusercontent.com/19776127/40585161-5add98b2-61e0-11e8-9265-11bef7a1536d.png)
+
 
 ## Development
 
