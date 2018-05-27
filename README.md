@@ -45,14 +45,15 @@ Scenario: query 100 random records from table with 550,000 data rows.
 ## Fine-tuning
 
 This strategy is fast because:
+
 (1) Instead of plucking all id in the table, it selects id bewteen min_id and max_id.
     Then make complements if any missing records (id between min_id and max_id, but not exist in db). 
 
 (2) It select id 1.25 times more than required. So that it doesn't need to perform another query to make complements.
     And of course, it will truncate to the required number before method return.
     
-    You can configure your own multiply, which is 1.25 by default.
-    EX: My table has 10% deleted records, so multiply 1.1 will maximum the speed of random_records. 
+   You can configure your own multiply, which is 1.25 by default.
+   EX: My table has 10% deleted records, so multiply 1.1 will maximum the speed of random_records. 
     
     ```ruby
     # select 1.1 times more than required, that is 110 here.
