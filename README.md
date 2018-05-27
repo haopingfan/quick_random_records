@@ -27,7 +27,7 @@ users = User.random_records(10)
 
 ## Dramatically fast, compared to other random records strategies
 
-query 100 random records from table has 550,000 rows.
+Scenario: query 100 random records from table with 550,000 data rows.
 
 1. `quick_random_records` costs `25.0ms`.
 ![alt text](https://user-images.githubusercontent.com/19776127/40585122-b6a90cae-61df-11e8-8b54-96f238a370f2.png)
