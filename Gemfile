@@ -8,5 +8,5 @@ group :test do
   gem 'simplecov'
 end
 
-gemspec :path => "../"
+gemspec :path => "./"
 

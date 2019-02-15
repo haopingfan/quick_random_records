@@ -19,12 +19,12 @@ class QuickRandomRecordsTest < Minitest::Test
 
   def test_strategy1_query_part_with_multiple
     expected = 5
-    assert_equal expected, User.random_records(5, multiple: 1).size
+    assert_equal expected, User.random_records(5, multiply: 1).size
   end
 
   def test_strategy1_query_all_with_multiple
     expected = User.all
-    assert_equal expected, User.random_records(10, multiple: 1).sort
+    assert_equal expected, User.random_records(10, multiply: 1).sort
   end
 
   def test_strategy1_query_part_with_loop_limit

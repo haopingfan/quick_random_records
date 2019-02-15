@@ -18,7 +18,7 @@ class ActiveRecord::Base
   private
 
   def self.sample_complement_records(quantity, multiply, loop_limit)
-    min_max = self.pluck('MIN(id), MAX(id)').first
+    min_max = self.pluck(Arel.sql("MIN(#{self.table_name}.id), MAX(#{self.table_name}.id)")).first
     id_range = (min_max[0]..min_max[1])
 
     samples = [*id_range].sample(quantity * multiply)
@@ -46,9 +46,9 @@ class ActiveRecord::Base
    adapter_type = connection.adapter_name.downcase.to_sym
     case adapter_type
     when :mysql, :mysql2
-      self.order("RAND()").limit(quantity)
+      self.order(Arel.sql("RAND()")).limit(quantity)
     when :sqlite, :postgresql
-      self.order("RANDOM()").limit(quantity)
+      self.order(Arel.sql("RANDOM()")).limit(quantity)
     else
       raise NotImplementedError, "Unknown adapter type '#{adapter_type}'"
     end
