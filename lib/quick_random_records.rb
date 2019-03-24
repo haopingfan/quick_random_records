@@ -1,8 +1,8 @@
 require 'quick_random_records/version'
 require 'active_record'
 
-class ActiveRecord::Base
-  def self.random_records(quantity, strategy: 1, multiply: 1.05, loop_limit: 3)
+class << ActiveRecord::Base
+  def random_records(quantity, strategy: 1, multiply: 1.05, loop_limit: 3)
     case strategy
     when 1
       self.sample_complement_records(quantity, multiply, loop_limit)
@@ -17,7 +17,7 @@ class ActiveRecord::Base
 
   private
 
-  def self.sample_complement_records(quantity, multiply, loop_limit)
+  def sample_complement_records(quantity, multiply, loop_limit)
     min_max = self.pluck('MIN(id), MAX(id)').first
     id_range = (min_max[0]..min_max[1])
 
@@ -42,7 +42,7 @@ class ActiveRecord::Base
     self.where(id: exist_samples[0...quantity])
   end
 
-  def self.order_rand_limit_records(quantity)
+  def order_rand_limit_records(quantity)
    adapter_type = connection.adapter_name.downcase.to_sym
     case adapter_type
     when :mysql, :mysql2
@@ -54,7 +54,7 @@ class ActiveRecord::Base
     end
   end
 
-  def self.pluck_sample_records(quantity)
+  def pluck_sample_records(quantity)
     ids = self.pluck(:id).sample(quantity)
     self.where(id: ids)
   end
