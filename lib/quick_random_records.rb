@@ -5,11 +5,11 @@ class << ActiveRecord::Base
   def random_records(quantity, strategy: 1, multiply: 1.05, loop_limit: 3)
     case strategy
     when 1
-      self.sample_complement_records(quantity, multiply, loop_limit)
+      sample_complement_records(quantity, multiply, loop_limit)
     when 2
-      self.order_rand_limit_records(quantity)
+      order_rand_limit_records(quantity)
     when 3
-      self.pluck_sample_records(quantity)
+      pluck_sample_records(quantity)
     else
       "this gem doesn't support strategy other than 1, 2, 3"
     end
