@@ -66,7 +66,7 @@ This strategy is fast because:
 
 This strategy works extremely well with table that has a lot of records and few deleted records.
 
-But for tables with a lot of deleted records (ex: 8 deleted reocrds out of 10 records),
+But for tables with a lot of deleted records (ex: 8 deleted records out of 10 records),
 it may return fewer random records as required since I limit the loop searching for complements.
 
 The default `loop_limit` is `3`. You can configure your own `loop_limit` for searching complements.
