@@ -47,12 +47,12 @@ Scenario: query 100 random records from table with 550,000 data rows in localhos
 This strategy is fast because:
 
 (1) Instead of plucking all id in the table, it selects id bewteen min_id and max_id.
-    Then make complements if any missing records (id between min_id and max_id, but not exist in db). 
+    Then make complements if any missing records (id between min_id and max_id, but not the id that are already selected). 
 
-(2) It selects records 1.05 times more than required. So that it doesn't need to perform another query to make complements.
-    And of course, it will truncate to required number of records before method return.
+(2) It selects 1.05 times more records than the required you specify. So that it doesn't need to perform further query to  
+ make complements for missing records. And of course, it will truncate to required number of records before method return.
     
-   You can configure your own multiply, which is 1.05 by default.
+   You can configure your own multiply, which is 1.05 by default, to trade off between the safety and the performance.
    EX: If table has 10% deleted records, multiply 1.1 will maximize the speed of random_records. 
     
  ```ruby
@@ -66,10 +66,10 @@ This strategy is fast because:
 
 This strategy works extremely well with table that has a lot of records and few deleted records.
 
-But for tables with lots of deleted records (ex: 8 deleted records out of 10 records),
-it may return fewer random records than the required since I limit the loop searching for complements to avoid infinite loop.
+But for tables with lots of deleted records (ex: There is 8 deleted records among 10 records),
+it may return fewer records than you require since it limit the loop searching for complements to avoid infinite loop.
 
-The default `loop_limit` is `3`. You can configure your own `loop_limit` for searching complements.
+The default `loop_limit` is `3`. You can configure your own `loop_limit` for searching complements to trade off between the safety and the performance.
 ```ruby
 users = User.random_records(100, loop_limit: 5)
 ```
