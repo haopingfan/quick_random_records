@@ -52,8 +52,7 @@ This strategy is fast because:
 (2) It selects 1.05 times more records than the required you specify. So that it doesn't need to perform further query to  
  make complements for missing records. And of course, it will truncate to required number of records before method return.
     
-   You can configure your own multiply, which is 1.05 by default, to trade off between the safety and the performance.
-   EX: If table has 10% deleted records, multiply 1.1 will maximize the speed of random_records. 
+ You can configure your own multiply, which is 1.05 by default, to trade off between the safety and the performance.
     
  ```ruby
  # select 1.1 times more than required, that is 110 in this case. 
