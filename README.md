@@ -26,7 +26,7 @@ Or install it yourself as:
 users = User.random_records(10)
 ```
 
-## Dramatically fast, compared to common random records strategies
+## Fast, compared to common random records strategies
 
 Scenario: query 100 random records from table with 550,000 data rows in localhost.
 
@@ -62,30 +62,16 @@ This strategy is fast because:
  users = User.random_records(100, multiply: 1.1) 
  ```
    
-## Drawback
+## ***Dangerous Drawback
 
 This strategy works extremely well with table that has a lot of records and few deleted records.
 
-But for tables with a lot of deleted records (ex: 8 deleted records out of 10 records),
-it may return fewer random records as required since I limit the loop searching for complements.
+But for tables with lots of deleted records (ex: 8 deleted records out of 10 records),
+it may return fewer random records than the required since I limit the loop searching for complements to avoid infinite loop.
 
 The default `loop_limit` is `3`. You can configure your own `loop_limit` for searching complements.
 ```ruby
 users = User.random_records(100, loop_limit: 5)
-```
-
-OR
-
-You can use other strategy for tables with a lot of deleted records.
-
-`Model.order("RAND()").limit(num)` is strategy 2 supported by this GEM
-```ruby
-users = User.random_records(100, strategy: 2)
-```
-
-`Model.where(id: Model.pluck(:id).sample(num))` is strategy 3 supported by this GEM
-```ruby
-users = User.random_records(100, strategy: 3)
 ```
 
 ## Development
