@@ -50,9 +50,8 @@ This strategy is fast because:
     Then make further query to make complement if there is not enough valid records in the previous query. 
     (PS: it won't select the duplicate records.) 
 
-(2) It selects 1.05 times more records per query than your require. So that it doesn't need to perform further query to  
- make complements for insufficient valid records. And of course, it will return the number of records you require.
- You can configure your own multiply factor, which is 1.05 by default.
+(2) It selects 1.05 times more records per query than you require, so that it doesn't need to perform further query to  
+ make complements for insufficient valid records. You can configure your own multiply factor, which is 1.05 by default.
  
  ```ruby
  # select 1.1 times more than required, that is 110 in this case. 
