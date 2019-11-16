@@ -1,6 +1,6 @@
 ## QuickRandomRecords
 
-`quick_random_records` is a Ruby Gem that empowers ActiveRecord Model to return random records dramatically fast, even with tables that have lots of data rows.
+`quick_random_records` is a Ruby Gem that empowers ActiveRecord Model to return random records dramatically fast, even with tables that have lots of data rows and few deleted records.
 
 ## Installation
 
@@ -68,7 +68,7 @@ This strategy works extremely well with table that has a lot of records and few 
 But for tables with lots of deleted records (ex: There is 8 deleted records among 10 records),
 it may return fewer records than you require since it limit the loop searching for complements to avoid infinite loop.
 
-The default `loop_limit` is `3`. You can configure your own `loop_limit` for searching complements to trade off between the safety and the performance.
+The default `loop_limit` is `3` times. You can configure your own `loop_limit` (for search complements if there is not enough valid records in the previous query) to trade off between the safety and the performance.
 ```ruby
 users = User.random_records(100, loop_limit: 5)
 ```
