@@ -1,6 +1,6 @@
 ## QuickRandomRecords
 
-`quick_random_records` is a Ruby Gem that empowers ActiveRecord Model to return random records dramatically fast, even with tables that have lots of data rows and few deleted records.
+`quick_random_records` is a Ruby Gem that empowers ActiveRecord Model to return random records fast when your table has lots of records and few deleted records.
 
 ## Installation
 
@@ -47,13 +47,13 @@ Scenario: query 100 random records from table with 550,000 data rows in localhos
 This strategy is fast because:
 
 (1) Instead of plucking all id in the table, it selects id bewteen min_id and max_id.
-    Then make complements if any missing records (id between min_id and max_id, but not the id that are already selected). 
+    Then make further query to make complement if there is not enough valid records in the previous query. 
+    (PS: it won't select the duplicate records.) 
 
-(2) It selects 1.05 times more records than the required you specify. So that it doesn't need to perform further query to  
- make complements for missing records. And of course, it will truncate to required number of records before method return.
-    
- You can configure your own multiply, which is 1.05 by default, to trade off between the safety and the performance.
-    
+(2) It selects 1.05 times more records per query than your require. So that it doesn't need to perform further query to  
+ make complements for insufficient valid records. And of course, it will return the number of records you require.
+ You can configure your own multiply factor, which is 1.05 by default.
+ 
  ```ruby
  # select 1.1 times more than required, that is 110 in this case. 
  # And it will truncate to 100 before method return.
@@ -65,12 +65,13 @@ This strategy is fast because:
 
 This strategy works extremely well with table that has a lot of records and few deleted records.
 
-But for tables with lots of deleted records (ex: There is 8 deleted records among 10 records),
-it may return fewer records than you require since it limit the loop searching for complements to avoid infinite loop.
+However, for tables with lots of deleted records (ex: There is 8 deleted records among 10 records),
+it may return fewer records than you require since it limit the loop of making query of complements to avoid infinite loop.
 
-The default `loop_limit` is `3` times. You can configure your own `loop_limit` (for search complements if there is not enough valid records in the previous query) to trade off between the safety and the performance.
+The default `loop_limit` is `3` times. You can configure your own `loop_limit` for searching complements if there is not enough valid records in the previous query.
 ```ruby
 users = User.random_records(100, loop_limit: 5)
+
 ```
 
 ## Development
