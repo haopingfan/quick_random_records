@@ -65,7 +65,7 @@ This strategy is fast because:
 This strategy works extremely well with table that has a lot of records and few deleted records.
 
 However, for tables with lots of deleted records (ex: There is 8 deleted records among 10 records),
-it may return fewer records than you require since it limit the loop of making query of complements to avoid infinite loop.
+it may return fewer records than you require because it limit the loop of making query of complements to avoid infinite loop.
 
 The default `loop_limit` is `3` times. You can configure your own `loop_limit` for searching complements if there is not enough valid records in the previous query.
 ```ruby
